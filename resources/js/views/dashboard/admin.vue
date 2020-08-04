@@ -277,6 +277,15 @@ export default {
           animations: {
             enabled: true,
           },
+          dropShadow: {
+            enabled: true,
+            enabledOnSeries: [0],
+            top: 12,
+            left: 0,
+            blur: 3,
+            color: "#827AF3",
+            opacity: 0.2,
+          },
         },
         dataLabels: {
           enabled: false,
@@ -287,7 +296,7 @@ export default {
         series: [
           {
             name: "Incomes",
-            data: this.Incomes,
+            data: [31, 40, 28, 51, 42, 109, 100, 11, 32, 45, 32, 34, 52, 41],
           },
         ],
         fill: {
@@ -308,6 +317,7 @@ export default {
           },
         },
         tooltip: {
+          theme: "dark",
           y: {
             formatter: function (val) {
               return val + " Ks (Thousand)";
@@ -339,7 +349,15 @@ export default {
           zoom: {
             enabled: false,
           },
-
+          dropShadow: {
+            enabled: true,
+            enabledOnSeries: [0],
+            top: 12,
+            left: 0,
+            blur: 3,
+            color: "#28C76F",
+            opacity: 0.2,
+          },
           animations: {
             enabled: true,
           },
@@ -451,11 +469,7 @@ export default {
       axios
         .get(`web/sellProduct/`)
         .then((response) => {
-          // this.sellProducts = response.data;
-          for (let i = 0; i < 6; i++) {
-            this.sellProducts.push(response.data[0]);
-          }
-          console.log("getSellProduct -> this.sellProducts", this.sellProducts);
+          this.sellProducts = response.data;
         })
         .catch((error) => {
           console.log("error: ", error);

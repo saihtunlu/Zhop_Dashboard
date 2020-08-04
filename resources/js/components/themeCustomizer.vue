@@ -204,72 +204,72 @@ export default {
       animations: [
         {
           value: "zoom-in-out",
-          name: "Default"
+          name: "Default",
         },
         {
           value: "fade-in-right",
-          name: "Fade In Right"
+          name: "Fade In Right",
         },
         {
           value: "fade-in-left",
-          name: "Fade In Left"
+          name: "Fade In Left",
         },
         {
           value: "fade-in-up",
-          name: "Fade In Up"
+          name: "Fade In Up",
         },
         {
           value: "zoom",
-          name: "Zoom"
+          name: "Zoom",
         },
         {
           value: "flip-x",
-          name: "Flip-X"
+          name: "Flip-X",
         },
         {
           value: "flip-y",
-          name: "Flip-Y"
+          name: "Flip-Y",
         },
         {
           value: "overlay-right",
-          name: "Overlay Right"
+          name: "Overlay Right",
         },
         {
           value: "overlay-left",
-          name: "Overlay Left"
+          name: "Overlay Left",
         },
         {
           value: "overlay-down",
-          name: "Overlay Down"
+          name: "Overlay Down",
         },
         {
           value: "overlay-up",
-          name: "Overlay Up"
+          name: "Overlay Up",
         },
         {
           value: "overlay-right-full",
-          name: "Overlay Right Full"
+          name: "Overlay Right Full",
         },
         {
           value: "overlay-left-full",
-          name: "Overlay Left Full"
+          name: "Overlay Left Full",
         },
         {
           value: "overlay-down-full",
-          name: "Overlay Down Full"
+          name: "Overlay Down Full",
         },
         {
           value: "overlay-up-full",
-          name: "Overlay Up Full"
+          name: "Overlay Up Full",
         },
         {
           value: "overlay-left-right",
-          name: "Overlay Left Right"
+          name: "Overlay Left Right",
         },
         {
           value: "overlay-up-down",
-          name: "Overlay Up Down"
-        }
+          name: "Overlay Up Down",
+        },
       ],
       animation: "zoom-in-out",
       Right_sidebar: false,
@@ -280,7 +280,7 @@ export default {
       color: "",
       Seccolor: "",
       themecolor: "#827AF3",
-      Secthemecolor: "#B47AF3"
+      Secthemecolor: "#B47AF3",
     };
   },
   mounted() {},
@@ -296,20 +296,20 @@ export default {
     getGeneral() {
       axios
         .get(`web/getGeneral`)
-        .then(response => {
+        .then((response) => {
           this.general_detail = response.data;
           this.$vs.theme({
             primary: this.general_detail.primary,
             light_primary: this.general_detail.light_primary,
             success: this.general_detail.success,
             danger: this.general_detail.danger,
-            warning: this.general_detail.warning
+            warning: this.general_detail.warning,
           });
           this.animation = this.general_detail.transition;
 
           this.started_action();
         })
-        .catch(error => {});
+        .catch((error) => {});
     },
     started_action() {
       var ani = localStorage.getItem("animation");
@@ -319,7 +319,6 @@ export default {
       //Theme
       var color = localStorage.getItem("color");
       var Seccolor = localStorage.getItem("Seccolor");
-
       var themecolor = localStorage.getItem("themecolor");
       var Secthemecolor = localStorage.getItem("Secthemecolor");
       var logo = localStorage.getItem("logo");
@@ -369,12 +368,12 @@ export default {
     },
     theme_color(default_color) {
       this.$vs.theme({
-        primary: default_color
+        primary: default_color,
       });
     },
     theme_Seccolor(default_color) {
       this.$vs.theme({
-        light_primary: default_color
+        light_primary: default_color,
       });
     },
     change_color() {
@@ -385,7 +384,7 @@ export default {
       let b = parseInt(color.substring(4, 6), 16);
       let result = "rgb(" + r + "," + g + "," + b + ")";
       this.$vs.theme({
-        primary: result // my new color
+        primary: result, // my new color
       });
       localStorage.setItem("color", result);
       localStorage.setItem("themecolor", color);
@@ -398,7 +397,7 @@ export default {
       let b = parseInt(color.substring(4, 6), 16);
       let result = "rgb(" + r + "," + g + "," + b + ")";
       this.$vs.theme({
-        light_primary: result // my new color
+        light_primary: result, // my new color
       });
       localStorage.setItem("Seccolor", result);
       localStorage.setItem("Secthemecolor", color);
@@ -406,14 +405,14 @@ export default {
     color_btn(e) {
       this.themecolor = e;
       this.$vs.theme({
-        primary: e
+        primary: e,
       });
       localStorage.setItem("color", e);
     },
     Seccolor_btn(e) {
       this.Secthemecolor = e;
       this.$vs.theme({
-        light_primary: e
+        light_primary: e,
       });
       localStorage.setItem("Seccolor", e);
     },
@@ -432,7 +431,7 @@ export default {
         dark: "rgb(225,225,225)",
         semi_dark: "rgb(225,225,225)",
         dark2: "rgb(225,225,225)",
-        light: "rgb(65,65,65)"
+        light: "rgb(65,65,65)",
       });
       localStorage.setItem("theme", "dark");
       this.radios1 = "dark";
@@ -451,7 +450,7 @@ export default {
         input: "rgb(255, 255, 255)",
         dark: "rgb(65,65,65)",
         dark2: "rgb(89,89,89)",
-        light: "rgb(255,255,255)"
+        light: "rgb(255,255,255)",
       });
       localStorage.setItem("theme", "semi_dark");
       this.radios1 = "semi_dark";
@@ -470,13 +469,12 @@ export default {
         dark: "rgb(65,65,65)",
         semi_dark: "rgb(65,65,65)",
         dark2: "rgb(89,89,89)",
-        light: "rgb(255,255,255)"
+        light: "rgb(255,255,255)",
       });
     },
     themeFilter() {
       var theme = this.theme_mode;
-      console.log("theme: ", theme);
-      var data = this.themes.filter(data => {
+      var data = this.themes.filter((data) => {
         return data.mode === theme;
       });
       this.theme = data[0];
@@ -490,21 +488,20 @@ export default {
         input: this.theme.input,
         dark: this.theme.dark,
         semi_dark: this.theme.semi_dark,
-        semi_theme: this.theme.semi_theme
+        semi_theme: this.theme.semi_theme,
       });
-
       localStorage.setItem("theme", theme);
       this.radios1 = theme;
     },
     getThemes() {
       axios
         .get(`web/getTheme`)
-        .then(response => {
+        .then((response) => {
           this.themes = response.data;
           this.themeFilter();
         })
-        .catch(error => {});
-    }
-  }
+        .catch((error) => {});
+    },
+  },
 };
 </script>

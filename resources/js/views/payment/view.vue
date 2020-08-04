@@ -245,6 +245,7 @@ export default {
         restrictions: [{ newCities: [] }],
       },
       type: "",
+      shippings: [],
     };
   },
   created() {
@@ -282,7 +283,6 @@ export default {
       axios
         .get(`web/getShippings`)
         .then((response) => {
-          console.log(response.data);
           this.shippings = response.data;
         })
         .catch((error) => {});

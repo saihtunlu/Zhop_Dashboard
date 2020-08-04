@@ -22,7 +22,7 @@
         />
       </div>
       <div v-if="!searching" class="nav_items">
-        <div class="nav_left ml-2" v-if="show_fav">
+        <div class="nav_left" v-if="show_fav">
           <draggable
             id="favs"
             v-model="favs"
@@ -177,7 +177,7 @@ export default {
   props: {
     auth: {},
     noti: 0,
-    mobile: false
+    mobile: false,
   },
   data() {
     return {
@@ -186,21 +186,21 @@ export default {
           id: 1,
           icon: "icon-check-square",
           content: "Todo",
-          link: "/todo"
+          link: "/todo",
         },
 
         {
           id: 3,
           icon: "icon-mail",
           content: "Mail",
-          link: "/mail"
+          link: "/mail",
         },
         {
           id: 4,
           icon: "icon-calendar",
           content: "Calendar",
-          link: "/calendar"
-        }
+          link: "/calendar",
+        },
       ],
       show_fav: true,
       show_menu_btn: false,
@@ -217,7 +217,7 @@ export default {
       show: false,
       reduce: false,
       role: "",
-      active: false
+      active: false,
     };
   },
   created() {
@@ -228,10 +228,10 @@ export default {
     var checkFav = localStorage.getItem("favs");
     if (checkFav) {
       this.favs = JSON.parse(localStorage.getItem("favs"));
-      var todo = this.favs.find(fav => fav.id === 1);
-      var chat = this.favs.find(fav => fav.id === 2);
-      var mail = this.favs.find(fav => fav.id === 3);
-      var calendar = this.favs.find(fav => fav.id === 4);
+      var todo = this.favs.find((fav) => fav.id === 1);
+      var chat = this.favs.find((fav) => fav.id === 2);
+      var mail = this.favs.find((fav) => fav.id === 3);
+      var calendar = this.favs.find((fav) => fav.id === 4);
 
       if (todo) {
         this.todocolor = "warning";
@@ -261,7 +261,7 @@ export default {
   },
 
   components: {
-    draggable
+    draggable,
   },
   methods: {
     change_fav() {
@@ -276,7 +276,7 @@ export default {
       this.todo = !this.todo;
       console.log("this.todo: ", this.todo);
       if (this.todo === false) {
-        const filtered = this.favs.filter(fav => fav.id !== 1);
+        const filtered = this.favs.filter((fav) => fav.id !== 1);
         this.favs = filtered;
         if (localStorage.getItem("favs")) {
           localStorage.removeItem("favs");
@@ -289,7 +289,7 @@ export default {
           id: 1,
           icon: "icon-check-square",
           content: "Todo",
-          link: "/todo"
+          link: "/todo",
         };
         this.favs.push(todo);
         if (localStorage.getItem("favs")) {
@@ -303,7 +303,7 @@ export default {
     changeChat() {
       this.chat = !this.chat;
       if (this.chat === false) {
-        const filtered = this.favs.filter(fav => fav.id !== 2);
+        const filtered = this.favs.filter((fav) => fav.id !== 2);
         this.favs = filtered;
         if (localStorage.getItem("favs")) {
           localStorage.removeItem("favs");
@@ -316,7 +316,7 @@ export default {
           id: 2,
           icon: "icon-message-square",
           content: "Chat",
-          link: "/chat"
+          link: "/chat",
         };
         this.favs.push(chat);
         if (localStorage.getItem("favs")) {
@@ -330,7 +330,7 @@ export default {
     changeMail() {
       this.mail = !this.mail;
       if (this.mail === false) {
-        const filtered = this.favs.filter(fav => fav.id !== 3);
+        const filtered = this.favs.filter((fav) => fav.id !== 3);
         this.favs = filtered;
         if (localStorage.getItem("favs")) {
           localStorage.removeItem("favs");
@@ -343,7 +343,7 @@ export default {
           id: 3,
           icon: "icon-mail",
           content: "Mail",
-          link: "/mail"
+          link: "/mail",
         };
         this.favs.push(mail);
         if (localStorage.getItem("favs")) {
@@ -357,7 +357,7 @@ export default {
     changeCalendar() {
       this.calendar = !this.calendar;
       if (this.calendar === false) {
-        const filtered = this.favs.filter(fav => fav.id !== 4);
+        const filtered = this.favs.filter((fav) => fav.id !== 4);
         this.favs = filtered;
         if (localStorage.getItem("favs")) {
           localStorage.removeItem("favs");
@@ -370,7 +370,7 @@ export default {
           id: 4,
           icon: "icon-calendar",
           content: "Calendar",
-          link: "/calendar"
+          link: "/calendar",
         };
         this.favs.push(calendar);
         if (localStorage.getItem("favs")) {
@@ -382,13 +382,13 @@ export default {
       }
     },
     logout() {
-      axios.post("/logout").then(response => {
+      axios.post("/logout").then((response) => {
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("Auth");
         window.location.reload();
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

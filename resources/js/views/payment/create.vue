@@ -3,7 +3,7 @@
     <!-- breadcrumb -->
     <nav aria-label="breadcrumb" class="vs-breadcrumb vs-align-left">
       <ol class="vs-breadcrumb--ol">
-        <h3 class="BC_header">Add Shipping</h3>
+        <h3 class="BC_header">Add Payment Method</h3>
         <li class="BC_link">
           <router-link :to="{ name: 'Dashboard' }">
             <vs-icon icon-pack="feather" icon="icon-home" size="small" color="primary"></vs-icon>
@@ -31,7 +31,7 @@
           </span>
         </li>
         <li class="BC_link">
-          <router-link :to="{ name: 'Shippings' }">Shippings</router-link>
+          <router-link :to="{ name: 'Payment' }">Payment Methods</router-link>
           <span
             translate="translate"
             aria-hidden="true"

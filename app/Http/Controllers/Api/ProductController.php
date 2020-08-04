@@ -243,6 +243,7 @@ class ProductController extends Controller
         $Product->threshold = $product->threshold;
         $Product->weight = $product->weight;
         $Product->height = $product->height;
+        $Product->Length = $product->Length;
         $Product->width = $product->width;
         $Product->video_link = $product->video_link;
         $Product->discount = $product->discount;
@@ -324,7 +325,7 @@ class ProductController extends Controller
         if ($request->file11) {
             $images[10] = $request->file11;
         }
-        if (count($images) !== 0) {
+        if ($images[0] !== 'undefined') {
             ProductImage::where('product_id', $Product->id)->delete();
             foreach ($images as $key => $data) {
                 if ($data) {
@@ -362,7 +363,7 @@ class ProductController extends Controller
                 $Variation->width = $data->width;
                 $Variation->discount = $discount;
                 if ($data->image) {
-                    if (preg_match('%^[a-zA-Z0-9/+]*={0,2}$%', 'images/uploads/1596034943Avatar.jpg')) {
+                    if (!preg_match('%^[a-zA-Z0-9/+]*={0,2}$%', 'images/uploads/1596034943Avatar.jpg')) {
                         $Variation->image = $data->image;
                     } else {
                         $image = $data->image; // base64 encoded

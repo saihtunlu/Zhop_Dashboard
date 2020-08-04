@@ -49,6 +49,20 @@
 img {
     max-width: 100%;
 }
+.ready-progress {
+    display: none !important;
+}
+div#Main_sidebar .vs-sidebar:not(.vs-sidebar-position-right) {
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    background: rgb(var(--vs-semi_theme)) !important;
+    border-radius: 1.5rem;
+    height: calc(100vh - 30px);
+    margin-top: 15px;
+    margin-left: 15px;
+    padding-bottom: 10px;
+    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1) !important;
+}
 .sellProduct {
     padding: 0.7rem;
     background: linear-gradient(
@@ -64,16 +78,18 @@ img {
 .productImage > .con-upload > .con-img-upload {
     display: block !important;
 }
-.edit1 > .con-upload > .con-img-upload {
+.brand_dialog .con-upload > .con-img-upload {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .vuesax-app-is-ltr .con-img-upload .img-upload {
-    border-radius: 0.5rem;
+    border-radius: 1.5rem;
     overflow: hidden;
 }
-
+label {
+    color: rgb(var(--vs-dark));
+}
 .vs-dialog-text {
     max-height: 90vh;
     overflow: scroll;
@@ -193,10 +209,10 @@ li.getMoreMessage span.vs-divider--text {
 .v-tour > div {
     z-index: 100000 !important;
     background: rgb(var(--vs-primary)) !important;
-    border-radius: 0.5rem !important;
+    border-radius: 1.5rem !important;
     border: none !important;
-    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.02),
-        0 5px 15px 0 rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0px 4px 25px -8px rgb(var(--vs-primary), 0.2) !important;
+    filter: none !important;
 }
 /* .v-step__arrow {
     border-color: rgb(var(--vs-primary)) !important;
@@ -211,9 +227,8 @@ li.getMoreMessage span.vs-divider--text {
     display: flex;
 }
 .v-tour > div button.v-step__button {
-    border-radius: 0.4rem;
-    min-width: 70px;
-    /* font-size: 12px; */
+    border-radius: 10rem;
+    min-width: 80px;
 }
 .vfc-week .vfc-day span.vfc-span-day {
     width: 35px;
@@ -269,7 +284,7 @@ tspan {
 .summery {
     background: rgb(var(--vs-theme));
     padding: 1.5rem;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
 }
 .icon_2 {
     font-size: 30px;
@@ -332,8 +347,8 @@ input#invoice_email {
 }
 button#send_invoice {
     padding: 0px 1.2rem;
-    border-bottom-left-radius: 0px;
-    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 0px !important;
 }
 .mail_detail > .header-text {
     font-size: 16px;
@@ -392,7 +407,7 @@ ul.body-list {
     height: 80px !important;
     border: none !important;
     box-shadow: 0px 10px 25px -8px rgb(0, 0, 0, 0.15);
-    border-radius: 1rem !important;
+    border-radius: 1.5rem !important;
     overflow: hidden;
 }
 .theme_colors {
@@ -403,7 +418,7 @@ ul.body-list {
         rgba(var(--vs-light_primary), 0.2) 100%
     ) !important;
     margin: 0px !important;
-    border-radius: 0.5rem;
+    border-radius: 1.5rem;
 }
 .color_box > p {
     text-align: center;
@@ -473,11 +488,10 @@ span.next-month:hover {
     border-radius: 50% !important;
     background: rgb(var(--vs-danger), 0.5);
 }
-.vue-form-wizard .wizard-icon-circle .wizard-icon-container {
-    border-radius: 0.7rem !important;
-}
+
 .vue-form-wizard .wizard-icon-circle {
-    border-radius: 1rem !important;
+    border-radius: 10rem !important;
+    overflow: hidden;
 }
 .delete_cat {
     transition: 0.25s all;
@@ -1190,6 +1204,7 @@ div#Chat_contacts .vs-sidebar--header {
 div#todo_menu .vs-sidebar--header .header-sidebar button {
     padding: 0.65rem 2rem !important;
     width: 85%;
+    margin-right: 8px;
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
 }
@@ -2093,7 +2108,7 @@ tr {
 }
 
 .div_shadow {
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1) !important;
     background: rgb(var(--vs-theme));
     transition: all 0.3s;
@@ -2289,16 +2304,16 @@ th:not(.td-check) {
 }
 
 .content_body {
-    margin-left: 260px;
-    width: calc(100% - 260px);
+    margin-left: 275px;
+    width: calc(100% - 275px);
     transition: all 0.3s;
     padding: 15px 45px;
 }
 
 .content_body.reduce {
-    margin-left: 65px;
+    margin-left: 80px;
     min-height: 100vh !important;
-    width: calc(100% - 65px);
+    width: calc(100% - 80px);
 }
 div#Main_sidebar .vs-sidebar-reduce .vs-sidebar-item-active {
     border-right: none !important;
@@ -2306,11 +2321,14 @@ div#Main_sidebar .vs-sidebar-reduce .vs-sidebar-item-active {
 .vs-sidebar--item:not(.vs-sidebar-item-active):hover > a {
     transform: translateX(5px);
 }
+input {
+    border-radius: 10rem !important;
+}
 
 .vs-sidebar--item > a {
     font-size: 15px;
     display: flex;
-    border-radius: 4px;
+    border-radius: 10rem;
     margin: 5px 15px;
     padding: 8px 10px !important;
 }
@@ -2321,24 +2339,23 @@ div#Main_sidebar .vs-sidebar-reduce .vs-sidebar-item-active {
 }
 
 .vs-sidebar-primary .vs-sidebar-item-active > a > i {
-    color: #fff;
+    color: rgb(var(--vs-primary)) !important;
     margin-right: 1rem;
 }
 
 .vs-sidebar-primary .vs-sidebar-item-active > a:hover {
-    color: #fff;
+    color: rgb(var(--vs-primary)) !important;
 }
 span.vs-checkbox--check i {
     font-size: 16px !important;
 }
 .vs-sidebar-primary .vs-sidebar-item-active > a {
-    box-shadow: 0 0 10px 1px rgba(var(--vs-primary), 0.7);
-    color: #fff !important;
+    color: rgb(var(--vs-primary)) !important;
     background: linear-gradient(
-        118deg,
-        rgba(var(--vs-primary), 1),
-        rgba(var(--vs-light_primary))
-    );
+        to right,
+        rgba(var(--vs-primary), 0.2) 0%,
+        rgba(var(--vs-light_primary), 0.2) 100%
+    ) !important;
 }
 
 /* .vs-sidebar-item-active > a:hover {
@@ -2397,11 +2414,47 @@ header.vs-sidebar--header {
 tr.tr-values.vs-table--tr {
     border-bottom: 1px solid rgb(var(--vs-dark), 0.1) !important;
 }
-
 span.reduce_btn {
     color: rgb(var(--vs-primary));
+    cursor: pointer;
+    border-radius: 10rem;
+    height: 30px;
+    right: -5px;
+    position: relative;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.el-cascader__suggestion-item > span,
+.el-collapse-item__header,
+.vs-input--input {
+    color: rgb(var(--vs-dark)) !important;
+}
+.el-collapse,
+.el-collapse-item > div {
+    background: rgb(var(--vs-theme)) !important;
+}
+.el-collapse-item__header {
+    background: rgb(var(--vs-theme));
+    color: rgb(var(--vs-dark)) !important;
+}
+.el-cascader__suggestion-item:focus,
+.el-cascader__suggestion-item:hover {
+    background: rgb(var(--vs-primary), 0.2) !important;
+}
+input.el-cascader__search-input {
+    background: rgb(var(--vs-input)) !important;
+    color: rgb(var(--vs-dark)) !important;
 }
 
+span.reduce_btn:hover {
+    background: linear-gradient(
+        to right,
+        rgba(var(--vs-primary), 0.2) 0%,
+        rgba(var(--vs-light_primary), 0.2) 100%
+    ) !important;
+}
 .header_sidebar {
     display: inline-flex;
     align-items: center;
@@ -2490,7 +2543,7 @@ span.user_name > .user_email {
     height: 63px;
     z-index: 1010;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 20px 0px;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     padding: 0rem 1rem;
     margin-bottom: 25px;
     background: rgb(var(--vs-theme)) !important;
@@ -2618,7 +2671,7 @@ nav.vs-breadcrumb.vs-align-left {
 /* employee_list */
 
 .employee {
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     padding: 15px;
     box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
 }
@@ -2745,7 +2798,7 @@ p.event-item {
 }
 
 .theme_color.el-color-picker > .el-color-picker__trigger {
-    border-radius: 0.8rem !important;
+    border-radius: 10rem !important;
     border: none !important;
     width: 35px !important;
     height: 35px !important;
@@ -2850,7 +2903,8 @@ p.more-link {
 }
 .el-popper.el-cascader__dropdown {
     z-index: 99999999 !important;
-    border-radius: 0.5rem !important;
+    border-radius: 1.5rem !important;
+    padding: 10px 0px;
     border: none !important;
     box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.02),
         0 5px 15px 0 rgba(0, 0, 0, 0.08) !important;
@@ -2936,20 +2990,35 @@ div#setting > .vs-sidebar {
     display: flex;
     padding: 1rem 0px;
     align-items: center;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     margin-top: 0.5rem;
     margin-bottom: 1rem;
     justify-content: space-evenly;
+}
+button.wizard-btn {
+    border-radius: 10rem !important;
+    background: linear-gradient(
+        118deg,
+        rgba(var(--vs-primary), 1),
+        rgba(var(--vs-light_primary))
+    ) !important;
+    border: 0px !important;
+    height: 38px !important;
+}
+button.wizard-btn:hover {
+    box-shadow: 0 8px 25px -8px rgba(var(--vs-primary), 1);
 }
 .theme_color {
     box-shadow: 0 2px 8px 0 rgba(var(--vs-dark), 0.14) !important;
     display: inline-flex !important;
     /* margin-right: 1rem; */
-    border-radius: 0.8rem !important;
+    border-radius: 10rem !important;
     width: 35px !important;
     height: 35px !important;
 }
-
+.add_user_btn {
+    margin-top: 1rem;
+}
 .color_btn {
     color: rgb(var(--vs-dark));
     border-bottom: 0.5px solid #8080807d;
@@ -3013,14 +3082,18 @@ div#view_body .vs-sidebar--items {
 }
 
 .float_btn {
-    width: 38px !important;
-    height: 38px !important;
+    width: 40px !important;
+    height: 40px !important;
     position: fixed;
-    right: -3px;
+    right: 0px;
     top: 50vh;
     z-index: 100000;
+    border-top-left-radius: 10rem;
+    border-bottom-left-radius: 10rem;
 }
-
+.nav_right button.vs-con-dropdown.parent-dropdown {
+    display: flex;
+}
 .float_btn > i {
     -webkit-animation: spin 1.5s linear infinite;
     animation: spin 1.6s linear infinite;
@@ -3096,7 +3169,7 @@ div#view_body .vs-sidebar--items {
     z-index: 100000 !important;
     border: none !important;
     background: rgb(var(--vs-theme2)) !important;
-    border-radius: 0.5rem !important;
+    border-radius: 1.5rem !important;
     box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.02),
         0 5px 15px 0 rgba(0, 0, 0, 0.08) !important;
 }
@@ -3289,7 +3362,7 @@ div#student_tabs .con-tab {
 #setting_tabs > .con-ul-tabs > .vs-tabs--ul {
     background: rgb(var(--vs-theme));
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     max-height: 64vh;
     overflow-y: auto;
 }
@@ -3297,12 +3370,14 @@ div#Main_sidebar header.vs-sidebar--header {
     min-height: 65px !important;
     max-height: 65px !important;
 }
-
+.vs-button:not(.float_btn) {
+    border-radius: 10rem !important;
+}
 #setting_tabs > .con-ul-tabs > .vs-tabs--ul > li > .vs-tabs--btn {
     color: rgb(var(--vs-dark), 0.7);
     padding: 5px 1rem !important;
     font-size: 14px;
-    border-radius: 0.5rem;
+    border-radius: 10rem;
     font-weight: 500;
 }
 div#setting_tabs li.vs-tabs--li.activeChild > button {
@@ -3466,7 +3541,7 @@ div#setting_tabs > .con-slot-tabs {
         rgba(var(--vs-primary), 0.2) 0%,
         rgba(var(--vs-light_primary), 0.2) 100%
     ) !important;
-    border-radius: 0.5rem;
+    border-radius: 1.5rem;
 }
 
 .nav_dropdown {
@@ -3749,7 +3824,7 @@ h2.el-notification__title {
         rgba(var(--vs-light_primary), 0.2) 100%
     ) !important;
     width: 35px !important;
-    border-radius: 0.8rem;
+    border-radius: 10rem;
     height: 35px !important;
     display: inline-flex;
     align-items: center;
@@ -3988,7 +4063,7 @@ button.el-button.el-color-dropdown__link-btn.el-button--text.el-button--mini:hov
     background: rgb(var(--vs-theme2)) !important;
     box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.02),
         0 5px 15px 0 rgba(0, 0, 0, 0.08) !important;
-    border-radius: 0.5rem !important;
+    border-radius: 1.5rem !important;
     border: 0px !important;
     z-index: 100000000000 !important;
 }
@@ -4282,8 +4357,21 @@ nav.vs-breadcrumb.vs-align-left {
     margin-left: auto;
     /* float: right; */
 }
+.router_view {
+    overflow: visible !important;
+}
+li.el-select-dropdown__item,
+.el-cascader-node,
+li.el-dropdown-menu__item {
+    width: calc(100% - 20px);
+    margin-left: 10px;
+    border-radius: 1.5rem;
+}
+.el-cascader-node label.el-checkbox {
+    margin-bottom: 0px !important;
+}
 .el-collapse {
-    border-radius: 0.5rem;
+    border-radius: 1.5rem;
     box-shadow: 0px 4px 25px -10px rgb(0, 0, 0, 0.2);
     border: 0px !important;
     overflow: hidden;
@@ -4302,6 +4390,8 @@ nav.vs-breadcrumb.vs-align-left {
 }
 .con-input-upload {
     background: rgb(var(--vs-gray2)) !important;
+    border-radius: 1.5rem !important;
+    overflow: hidden;
 }
 .deleteAttr {
     float: right;

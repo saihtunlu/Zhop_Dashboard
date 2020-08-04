@@ -60,7 +60,11 @@
       </ol>
     </nav>
     <!--End of breadcrumb -->
-    <vs-prompt class="add-event" :title="`Edit ${brand.name}`" :active.sync="editBrand">
+    <vs-prompt
+      class="add-event brand_dialog"
+      :title="`Edit ${brand.name}`"
+      :active.sync="editBrand"
+    >
       <div class="row">
         <div class="col-12 edit1 mb-3">
           <div class="con-upload">
@@ -209,7 +213,7 @@ export default {
       data: [],
       current_id: null,
       oldData: [],
-      Brands: []
+      Brands: [],
     };
   },
   mounted() {
@@ -225,11 +229,11 @@ export default {
     deleteBrand(id, index) {
       axios
         .delete(`web/deleteBrand/${id}`)
-        .then(response => {
+        .then((response) => {
           console.log(response.data);
           this.data.splice(index, -1);
         })
-        .catch(error => {});
+        .catch((error) => {});
     },
     EditBrand(data) {
       this.brand = data;
@@ -241,11 +245,11 @@ export default {
     getBrands() {
       axios
         .get(`web/getBrands`)
-        .then(response => {
+        .then((response) => {
           this.data = response.data;
           console.log("this.data: ", this.data);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log("error: ", error);
         });
     },
@@ -260,7 +264,7 @@ export default {
       var file = e.target.files[0];
       this.brand.image = null;
       var reader = new FileReader();
-      reader.onload = e => {
+      reader.onload = (e) => {
         this.brand.image = e.target.result;
       };
       reader.readAsDataURL(file);
@@ -272,30 +276,30 @@ export default {
         background: "rgba(var(--vs-primary),0.2)",
         color: "primary",
         type: "border",
-        scale: 0.4
+        scale: 0.4,
       });
 
       axios
         .post("web/editBrand", {
-          data: this.brand
+          data: this.brand,
         })
-        .then(response => {
+        .then((response) => {
           this.$vs.loading.close("#loading > .con-vs-loading");
           this.$message({
             message:
               "Congratulation! You have successfully created an invoice.",
-            type: "success"
+            type: "success",
           });
         })
-        .catch(error => {
+        .catch((error) => {
           this.$message({
             message: "Oops! There is an error while creating new invoice.",
-            type: "error"
+            type: "error",
           });
           this.$vs.loading.close("#loading > .con-vs-loading");
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

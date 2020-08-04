@@ -94,7 +94,38 @@
               <span class="truncate">{{ data[indextr].payment_method }}</span>
             </vs-td>
             <vs-td :data="data[indextr].status">
-              <span class="truncate">{{ data[indextr].status }}</span>
+              <span class="truncate">
+                <vs-progress
+                  :height="6"
+                  :percent="25"
+                  v-if="data[indextr].status ==='Pending'"
+                  color="warning"
+                ></vs-progress>
+                <vs-progress
+                  :height="6"
+                  :percent="50"
+                  v-if="data[indextr].status ==='Confirmed'"
+                  color="#bfdd13"
+                ></vs-progress>
+                <vs-progress
+                  :height="6"
+                  :percent="75"
+                  v-if="data[indextr].status ==='Delivering'"
+                  color="#7cdd13"
+                ></vs-progress>
+                <vs-progress
+                  :height="6"
+                  :percent="100"
+                  v-if="data[indextr].status ==='Completed'"
+                  color="success"
+                ></vs-progress>
+                <vs-progress
+                  :height="6"
+                  :percent="100"
+                  v-if="data[indextr].status ==='Cancelled'"
+                  color="danger"
+                ></vs-progress>
+              </span>
             </vs-td>
             <vs-td :data="data[indextr]">
               <vs-button

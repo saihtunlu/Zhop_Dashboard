@@ -14,6 +14,8 @@ Route::get('signup/activate/{token}', 'Api\VerificationController@signupActivate
 Route::get('general/', 'Api\GeneralController@index');
 Route::get('theme/', 'Api\ThemeController@index');
 
+Route::get('/slip/{id}', 'Api\OrderController@slip');
+
 //product details
 Route::get('getVariation/{no}', 'Api\ProductController@variations');
 Route::get('getAllData', 'Api\SendApiController@index');
@@ -80,32 +82,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::delete('/deleteStudent/{id}', 'Api\StudentController@destroy')->name('Delete_Student');
 });
 
-
-
-
-
-
 // Get_Token For Mobile App
 Route::post('/sanctum/token', 'Api\AuthController@login');
-
-// Route::post('/sanctum/token', function (Request $request) {
-//     $request->validate([
-//         'email' => 'required|email',
-//         'password' => 'required',
-//         'device_name' => 'required'
-//     ]);
-//     $user = User::where('email', $request->email)->first();
-//     if (!$user || !Hash::check($request->password, $user->password)) {
-//         throw ValidationException::withMessages([
-//             'email' => ['The provided credentials are incorrect.'],
-//         ]);
-//     }
-//     $orders = Order::where('user_id', $user->id)->with('detail.product.images', 'detail.product.brand', 'detail.product.categories', 'detail.product.tags.tag', 'detail.variation.product.images', 'detail.variation.product.variations.Attri2.attribute', 'detail.variation.Attri2.attribute', 'detail.variation.Attri1.attribute', 'detail.variation.product.variations.Attri1.attribute', 'detail.variation.product.brand', 'detail.variation.product.categories', 'detail.variation.product.tags.tag', 'billAddress', 'payment.banks', 'payment.restrictions')->get();
-//     $token = $user->createToken($request->device_name)->plainTextToken;
-//     $response = [
-//         'user' => $user,
-//         'token' => $token,
-//         'orders' => $orders
-//     ];
-//     return response($response, 201);
-// });

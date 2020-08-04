@@ -13,6 +13,7 @@ use App\Events\NewOrder;
 use App\Product;
 use App\Variation;
 use App\Events\OrderStatus;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -21,6 +22,13 @@ class OrderController extends Controller
         $user_id = Auth::id();
         $orders = Order::where('user_id', $user_id)->with('detail.product.images', 'detail.product.brand', 'detail.product.categories', 'detail.product.tags.tag', 'detail.variation.product.images', 'detail.variation.product.variations.Attri2.attribute', 'detail.variation.Attri2.attribute', 'detail.variation.Attri1.attribute', 'detail.variation.product.variations.Attri1.attribute', 'detail.variation.product.brand', 'detail.variation.product.categories', 'detail.variation.product.tags.tag', 'billAddress', 'payment.banks', 'payment.restrictions')->orderBy('created_at', 'desc')->get();
         return response()->json($orders);
+    }
+    public function slip($id)
+    {
+        $order = Order::where('id', $id)->with('user', 'detail.product.images', 'detail.product.brand', 'detail.product.categories', 'detail.product.tags.tag',  'detail.variation.product.images', 'detail.variation.Attri2.attribute', 'detail.variation.Attri1.attribute', 'detail.variation.product.variations.Attri2.attribute', 'detail.variation.product.variations.Attri1.attribute', 'detail.variation.product.brand', 'detail.variation.product.categories', 'detail.variation.product.tags.tag', 'billAddress', 'payment.banks', 'payment.restrictions')->first();
+        $pdf_name = $order->order_id . '-' . time() . '.pdf';
+        $slip = PDF::loadView('Pdf.slip', $order);
+        return $slip->download($pdf_name);
     }
     public function show($id)
     {

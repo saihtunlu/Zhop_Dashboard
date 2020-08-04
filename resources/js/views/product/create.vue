@@ -197,8 +197,7 @@
           </template>
 
           <div class="row pb-3">
-            <div class="col-lg-6 pb-3 flex-y-end">
-              <vs-input class="edit2_btns" label="Title*" v-model="attribute.title" required />
+            <div class="col-lg-12 flex-end">
               <vs-button
                 class="add_new"
                 color="primary"
@@ -206,9 +205,12 @@
                 v-if="attribute.title"
                 icon-pack="feather"
                 style="min-width:150px;"
-                icon="icon-file-plus"
+                icon="icon-plus"
                 @click="addAttrDetail(n)"
               >Add {{attribute.title}}</vs-button>
+            </div>
+            <div class="col-lg-6 pb-3 flex-y-end">
+              <vs-input class="edit2_btns" label="Title*" v-model="attribute.title" required />
             </div>
             <div class="col-lg-6 pb-3">
               <div style="animation:open 0.3s;" class="custom_input">
@@ -233,7 +235,7 @@
                   </template>
 
                   <div class="row">
-                    <div class="col-12 edit1 mb-3">
+                    <div class="col-12 edit1 mb-3 productImage">
                       <div class="con-upload">
                         <div class="con-img-upload">
                           <div
@@ -411,7 +413,7 @@
           </template>
 
           <div class="row mb-3 pb-3">
-            <div class="col-12 edit1 mb-3">
+            <div class="col-12 edit1 mb-3 productImage">
               <div class="con-upload">
                 <div class="con-img-upload">
                   <div

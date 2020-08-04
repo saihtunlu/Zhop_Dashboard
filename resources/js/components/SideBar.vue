@@ -21,7 +21,12 @@
           <vs-icon icon="icon-x" size="24px" icon-pack="feather" />
         </span>
         <span class="reduce_btn" v-if="!mobile " id="v-step-0" @click="reduce_sidebar()">
-          <svg
+          <vs-icon
+            :icon="reduce?'icon-chevrons-right':'icon-chevrons-left'"
+            size="20px"
+            icon-pack="feather"
+          />
+          <!-- <svg
             viewBox="0 0 24 24"
             width="20"
             height="20"
@@ -34,7 +39,7 @@
           >
             <circle cx="12" cy="12" r="10" />
             <circle v-if="reduce == false" cx="12" cy="12" r="3" />
-          </svg>
+          </svg>-->
         </span>
       </div>
 
@@ -90,7 +95,9 @@
         :class="{'vs-sidebar-item-active' : index === 6 ,'vs-sidebar-item-deactive': index !== 6}"
         icon-pack="feather"
         icon="icon-truck"
-      >Shipping Methods</vs-sidebar-item>
+      >
+        <span class="truncate">Shipping Methods</span>
+      </vs-sidebar-item>
 
       <vs-sidebar-item
         @click="close_sidebar() "
@@ -99,7 +106,9 @@
         :class="{'vs-sidebar-item-active' : index === 7 ,'vs-sidebar-item-deactive': index !== 7}"
         icon-pack="feather"
         icon="icon-credit-card"
-      >Payment Methods</vs-sidebar-item>
+      >
+        <span class="truncate">Payment Methods</span>
+      </vs-sidebar-item>
 
       <vs-sidebar-item
         @click="close_sidebar() "
