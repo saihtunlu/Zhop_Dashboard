@@ -4611,7 +4611,7 @@ img.sign_img {
 }
 
 .row.login_row {
-    border-radius: 0.5rem;
+    border-radius: 1.5rem;
     overflow: hidden;
     /* // animation: height 1s; */
     animation: rebound 0.5s;

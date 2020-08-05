@@ -246,7 +246,7 @@
               x{{ data[indextr].quantity }}
             </vs-td>
             <vs-td :data="data[indextr].regular_price">
-              <span>${{parseFloat(data[indextr].sale_price? data[indextr].sale_price:data[indextr].regular_price)* parseFloat(data[indextr].quantity)}}</span>
+              <span>{{parseFloat(data[indextr].sale_price? data[indextr].sale_price:data[indextr].regular_price)* parseFloat(data[indextr].quantity)}}Ks</span>
             </vs-td>
             <vs-td
               :data="data[indextr].type"

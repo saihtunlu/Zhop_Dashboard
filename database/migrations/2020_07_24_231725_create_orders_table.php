@@ -28,6 +28,7 @@ class CreateOrdersTable extends Migration
             $table->boolean('seen')->default(0);
             $table->string('order_id')->nullable();
             $table->string('totalWeight');
+            $table->string('shippingPrice')->nullable();
             $table->string('userName');
             $table->string('email');
             $table->string('phone');

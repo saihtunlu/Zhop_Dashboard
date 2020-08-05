@@ -56,6 +56,7 @@ class OrderController extends Controller
         $Order->payment_id = $data['selectedPayment']['id'];
         $Order->totalPrice = $data['totalPrice'];
         $Order->totalWeight = $data['totalWeight'];
+        $Order->shippingPrice = $data['shippingPrice'];
         $Order->payment_method = $data['selectedPayment']['type'];
         $Order->userName = $data['userName'];
         $Order->email = $data['email'];
