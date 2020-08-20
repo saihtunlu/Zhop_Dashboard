@@ -23,7 +23,7 @@ class FavController extends Controller
     {
         $user_id = Auth::id();
         $Fav = Fav::where('user_id', $user_id)->with('product.images', 'product.variations.Attri2.attribute', 'product.variations.Attri1.attribute', 'product.brand', 'product.categories', 'product.tags.tag')->get();
-        return response()->json($Fav);
+        return response()->json($Fav,200, [], JSON_NUMERIC_CHECK);
     }
     public function remove(Request $request)
     {

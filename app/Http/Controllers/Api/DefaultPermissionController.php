@@ -13,7 +13,7 @@ class DefaultPermissionController extends Controller
     {
         $DefaultPermission = DefaultPermission::with('roles')->get();
 
-        return response()->json($DefaultPermission);
+        return response()->json($DefaultPermission,200, [], JSON_NUMERIC_CHECK);
     }
     public function store(Request $request)
     {

@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Permission_User;
 use App\PermissionProduct;
+use App\PermissionInvoice;
 use App\Role;
 use app\User;
 use App\User_Role;
-use App\PermissionInvoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -25,7 +25,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::with('user_role', 'user_role.role')->get();
-        return response()->json($user);
+        return response()->json($user,200, [], JSON_NUMERIC_CHECK);
     }
 
 
@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         $id = Auth::id();
         $user = User::where('id', $id)->with('user_role', 'permission_user',   'permission_invoice')->first();
-        return response()->json($user);
+        return response()->json($user,200, [], JSON_NUMERIC_CHECK);
     }
 
     public function store(Request $request)
@@ -47,7 +47,7 @@ class UserController extends Controller
         $email = $user->email;
         $checkEmail = User::where('email', $email)->first();
         if (!empty($checkEmail)) {
-            return response()->json(['alert' => 'This email is already taken!']);
+            return response()->json(['alert' => 'This email is already taken!'], 422);
         } else {
             $file = $request->file;
             if ($file) {
@@ -69,9 +69,7 @@ class UserController extends Controller
             $User->name = $user->name;
             $User->password = $password;
             $User->activation_token = $activation_token;
-            if ($user->position !== 'Customer') {
-                $User->type = 'Employee';
-            }
+            $User->type = 'Employee';
             $User->save();
             $Role = Role::where('name', $user->position)->first();
             $User_Role = new User_Role;
@@ -79,69 +77,40 @@ class UserController extends Controller
             $User_Role->role_id = $Role->id;
             $User_Role->save();
             //set permissions
-            if ($user->position === 'Customer') {
-                //user_permission
-                $Permission_User = new Permission_User;
-                $Permission_User->name = 'User';
-                $Permission_User->create = 0;
-                $Permission_User->update = 0;
-                $Permission_User->read = 0;
-                $Permission_User->delete = 0;
-                $Permission_User->user_id = $User->id;
-                $Permission_User->save();
-                //user_permission
-                $PermissionProduct = new PermissionProduct;
-                $PermissionProduct->name = 'Product';
-                $PermissionProduct->create = 0;
-                $PermissionProduct->update = 0;
-                $PermissionProduct->read = 0;
-                $PermissionProduct->delete = 0;
-                $PermissionProduct->user_id = $User->id;
-                $PermissionProduct->save();
-                //invoice_permission
-                $PermissionInvoice = new PermissionInvoice;
-                $PermissionInvoice->name = 'Invoice';
-                $PermissionInvoice->create = 0;
-                $PermissionInvoice->update = 0;
-                $PermissionInvoice->read = 0;
-                $PermissionInvoice->delete = 0;
-                $PermissionInvoice->user_id = $User->id;
-                $PermissionInvoice->save();
-            } else {
-                foreach ($permissions as $data) {
-                    if ($data->name == 'User') {
-                        //user_permission
-                        $Permission_User = new Permission_User;
-                        $Permission_User->name = $data->name;
-                        $Permission_User->create = $data->create;
-                        $Permission_User->update = $data->update;
-                        $Permission_User->read = $data->read;
-                        $Permission_User->delete = $data->delete;
-                        $Permission_User->user_id = $User->id;
-                        $Permission_User->save();
-                    }
-                    if ($data->name == 'Product') {
-                        //user_permission
-                        $PermissionProduct = new PermissionProduct;
-                        $PermissionProduct->name = $data->name;
-                        $PermissionProduct->create = $data->create;
-                        $PermissionProduct->update = $data->update;
-                        $PermissionProduct->read = $data->read;
-                        $PermissionProduct->delete = $data->delete;
-                        $PermissionProduct->user_id = $User->id;
-                        $PermissionProduct->save();
-                    }
-                    if ($data->name == 'Invoice') {
-                        //invoice_permission
-                        $PermissionInvoice = new PermissionInvoice;
-                        $PermissionInvoice->name = $data->name;
-                        $PermissionInvoice->create = $data->create;
-                        $PermissionInvoice->update = $data->update;
-                        $PermissionInvoice->read = $data->read;
-                        $PermissionInvoice->delete = $data->delete;
-                        $PermissionInvoice->user_id = $User->id;
-                        $PermissionInvoice->save();
-                    }
+
+            foreach ($permissions as $data) {
+                if ($data->name == 'User') {
+                    //user_permission
+                    $Permission_User = new Permission_User;
+                    $Permission_User->name = $data->name;
+                    $Permission_User->create = $data->create;
+                    $Permission_User->update = $data->update;
+                    $Permission_User->read = $data->read;
+                    $Permission_User->delete = $data->delete;
+                    $Permission_User->user_id = $User->id;
+                    $Permission_User->save();
+                }
+                if ($data->name == 'Product') {
+                    //user_permission
+                    $PermissionProduct = new PermissionProduct;
+                    $PermissionProduct->name = $data->name;
+                    $PermissionProduct->create = $data->create;
+                    $PermissionProduct->update = $data->update;
+                    $PermissionProduct->read = $data->read;
+                    $PermissionProduct->delete = $data->delete;
+                    $PermissionProduct->user_id = $User->id;
+                    $PermissionProduct->save();
+                }
+                if ($data->name == 'Invoice') {
+                    //invoice_permission
+                    $PermissionInvoice = new PermissionInvoice;
+                    $PermissionInvoice->name = $data->name;
+                    $PermissionInvoice->create = $data->create;
+                    $PermissionInvoice->update = $data->update;
+                    $PermissionInvoice->read = $data->read;
+                    $PermissionInvoice->delete = $data->delete;
+                    $PermissionInvoice->user_id = $User->id;
+                    $PermissionInvoice->save();
                 }
             }
 
@@ -282,12 +251,12 @@ class UserController extends Controller
             $User->notify(new SignupActivate($User));
         }
 
-        return response()->json($User);
+        return response()->json($User,200, [], JSON_NUMERIC_CHECK);
     }
     public function show($id)
     {
         $user = User::where('id', $id)->with('user_role.role', 'permission_user',   'permission_invoice', 'permission_product')->first();
-        return response()->json($user);
+        return response()->json($user,200, [], JSON_NUMERIC_CHECK);
     }
     public function destroy($id)
     {

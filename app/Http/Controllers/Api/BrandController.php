@@ -33,7 +33,7 @@ class BrandController extends Controller
         }
         $Brand->save();
 
-        return response($Brand);
+        return response($Brand,200, [], JSON_NUMERIC_CHECK);
     }
     public function update(Request $request)
     {

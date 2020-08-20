@@ -54,7 +54,7 @@ Vue.use(ElementUI, { locale });
 
 //CustomCSS & Animation
 import "./assets/CustomCSS.css";
-import "./assets/animation.css";
+// import "./assets/animation.css";
 import "./assets/css/iconfont.css";
 
 //Gate

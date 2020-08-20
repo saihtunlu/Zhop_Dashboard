@@ -71,7 +71,7 @@
         </div>
 
         <div class="col-lg-12 mb-3">
-          <div style="animation:open 0.3s;" class="custom_input">
+          <div style="animation:open 0.3s;" class="custom_input multiShow">
             <label for class="vs-input--label" style="display:block;">Cities*</label>
             <el-select v-model="shipping.cities" multiple filterable default-first-option>
               <el-option
@@ -90,7 +90,10 @@
       <div class="row">
         <div class="col-12">
           <div class="flex-between">
-            <h4 class="header-text flex-align-center" style="margin-bottom:0.7rem !important;">
+            <h4
+              class="header-text flex-align-center display-sm-none"
+              style="margin-bottom:0.7rem !important;"
+            >
               <vs-icon
                 size="small"
                 class="custom_icon"

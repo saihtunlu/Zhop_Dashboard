@@ -4,11 +4,11 @@
       class="float_btn flex-center"
       color="primary"
       type="filled"
-      icon-pack="feather"
-      icon="icon-settings"
       data-v-step="2"
       @click="Right_sidebar=!Right_sidebar"
-    ></vs-button>
+    >
+      <vs-icon icon-pack="feather" class="float_icon" icon="icon-chevron-left" color="primary"></vs-icon>
+    </vs-button>
     <vs-sidebar
       hidden-background
       position-right
@@ -21,29 +21,19 @@
       spacer
       v-model="Right_sidebar"
     >
-      <div class="header-sidebar pt-4 pb-0" slot="header">
-        <h4 class="header-text" style="color:rgb(var(--vs-dark));">
-          THEME CUSTOMIZER
-          <span id="close_setting" @click="Right_sidebar=false">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20px"
-              height="20px"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-x"
-            >
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </span>
-        </h4>
+      <div class="header-sidebar flex-between-center" slot="header">
+        <h4 class="header-text mb0" style="color:#fff !important;">Theme Customization</h4>
+        <vs-button
+          @click="Right_sidebar=false"
+          radius
+          id="close_sidebar"
+          style="width:30px !important;height:30px !important;"
+          color="white"
+          icon-pack="feather"
+          icon="icon-chevrons-right"
+          type="flat"
+        ></vs-button>
       </div>
-      <vs-divider />
       <div class="color_btn mt-3 pb-4">
         <h5 class="text-lg text-bold">Page Transitions</h5>
         <div class="custom_input">

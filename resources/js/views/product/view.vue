@@ -657,9 +657,9 @@ export default {
           this.product.newTags = [];
           this.product.categories.forEach((data) => {
             var array = [
-              data.category1_id,
-              data.category2_id,
-              data.category3_id,
+              parseInt(data.category1_id),
+              parseInt(data.category2_id),
+              parseInt(data.category3_id),
             ];
             this.product.newCategories.push(array);
           });

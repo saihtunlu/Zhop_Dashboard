@@ -21,7 +21,7 @@ class OrderController extends Controller
     {
         $user_id = Auth::id();
         $orders = Order::where('user_id', $user_id)->with('detail.product.images', 'detail.product.brand', 'detail.product.categories', 'detail.product.tags.tag', 'detail.variation.product.images', 'detail.variation.product.variations.Attri2.attribute', 'detail.variation.Attri2.attribute', 'detail.variation.Attri1.attribute', 'detail.variation.product.variations.Attri1.attribute', 'detail.variation.product.brand', 'detail.variation.product.categories', 'detail.variation.product.tags.tag', 'billAddress', 'payment.banks', 'payment.restrictions')->orderBy('created_at', 'desc')->get();
-        return response()->json($orders);
+        return response()->json($orders,200, [], JSON_NUMERIC_CHECK);
     }
     public function slip($id)
     {
@@ -39,13 +39,13 @@ class OrderController extends Controller
     public function noti()
     {
         $order = Order::where('seen', 0)->get();
-        return response()->json(count($order));
+        return response()->json(count($order),200, [], JSON_NUMERIC_CHECK);
     }
     public function all()
     {
         DB::table('orders')->where('seen', '=', 0)->update(['seen' => 1]);
         $orders = Order::with('detail', 'billAddress')->orderBy('created_at', 'desc')->get();
-        return response()->json($orders);
+        return response()->json($orders,200, [], JSON_NUMERIC_CHECK);
     }
     public function store(Request $request)
     {
@@ -85,11 +85,11 @@ class OrderController extends Controller
                 $product->sold_out = (int)$product->sold_out + (int)$detail['addCart'];
                 if ($product->stock === 'Manage Stock') {
                     $product->number_of_stock = (int)$product->number_of_stock - (int)$detail['addCart'];
-                    if ($product->number_of_stock > 1) {
+                    if ($product->number_of_stock < 1) {
                         $product->stock = 'Out Of Stock';
                     }
-                    $product->save();
                 }
+                $product->save();
             }
             if ($detail['type'] === 'Variable Product') {
                 $orderDetail->variation_id = $detail['id'];
@@ -100,7 +100,7 @@ class OrderController extends Controller
                 $product->save();
                 if ($Variation->stock === 'Manage Stock') {
                     $Variation->number_of_stock = (int)$Variation->number_of_stock - (int)$detail['addCart'];
-                    if ($Variation->number_of_stock > 1) {
+                    if ($Variation->number_of_stock < 1) {
                         $Variation->stock = 'Out Of Stock';
                     }
                     $Variation->save();
@@ -112,7 +112,7 @@ class OrderController extends Controller
 
         $data = Auth::user();
         event(new NewOrder($data));
-        return response()->json($order, 200);
+        return response()->json($order,200, [], JSON_NUMERIC_CHECK);
     }
     public function update(Request $request)
     {

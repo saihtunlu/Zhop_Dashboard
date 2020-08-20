@@ -22,13 +22,13 @@ class AddressController extends Controller
         }
         $address->user_id = $user_id;
         $address->save();
-        return response()->json($address);
+        return response()->json($address,200, [], JSON_NUMERIC_CHECK);
     }
     public function index()
     {
         $user_id = Auth::id();
         $address = Address::where('user_id', $user_id)->first();
-        return response()->json($address);
+        return response()->json($address,200, [], JSON_NUMERIC_CHECK);
     }
     public function update(Request $request)
     {

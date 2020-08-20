@@ -11,7 +11,7 @@ class GeneralController extends Controller
     public function index()
     {
         $general = General::first();
-        return response()->json($general);
+        return response()->json($general,200, [], JSON_NUMERIC_CHECK);
     }
     public function logo(Request $request)
     {

@@ -7,6 +7,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap");
 /* Page Transition */
 @media print {
+    @page {
+        size: a4;
+    }
     *:not(i) {
         font-family: "Comfortaa", cursive;
     }
@@ -1531,6 +1534,7 @@ span.con-td-check {
 
 .sign_img_div {
     background: rgb(var(--vs-gray)) !important;
+    border-radius: 1.5rem;
 }
 
 .vue-form-wizard .wizard-icon-circle {
@@ -2942,12 +2946,38 @@ p.more-link {
 div#setting > .vs-sidebar--background {
     display: none;
 }
-
+div#setting > .vs-sidebar header.vs-sidebar--header {
+    height: 80px !important;
+    border-bottom: 1px solid rgb(var(--vs-gray));
+    background: linear-gradient(
+        118deg,
+        rgba(var(--vs-primary), 1),
+        rgba(var(--vs-light_primary))
+    ) !important;
+}
+button#close_sidebar:hover {
+    background: rgb(255, 255, 255, 0.2) !important;
+}
+.float_icon {
+    color: #fff;
+    background: rgb(255, 255, 255, 0.2);
+    padding: 7px;
+    border-radius: 10rem;
+    position: relative;
+    top: 2px;
+}
+div#setting > .vs-sidebar header.vs-sidebar--header .header-sidebar {
+    width: 100%;
+}
 div#setting > .vs-sidebar {
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.14) !important;
+    box-shadow: 0 4px 25px -8px rgba(0, 0, 0, 0.2) !important;
     transition: all 0.3s;
+    border-radius: 1.5rem !important;
     max-width: 370px !important;
+    height: calc(100vh - 30px);
+    right: 15px;
     background: rgb(var(--vs-theme)) !important;
+    margin-top: 15px !important;
 }
 
 .vs-table--tbody-table tr {
@@ -3153,9 +3183,11 @@ div#view_body .vs-sidebar--items {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 15px !important;
+    padding: 0px 15px !important;
 }
-
+.multiShow input.el-input__inner {
+    border-radius: 5px !important;
+}
 .select_fav_menu {
     min-width: 220px !important;
 }
@@ -3709,7 +3741,7 @@ span.input-icon-validate > i {
 } */
 
 .stickey_header {
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     overflow: visible;
     transition: 0.1s all;
     margin: 0px -15px;
@@ -4609,6 +4641,12 @@ img.sign_img {
     background: #eff2f7;
     padding: 0px !important;
 }
+.vuesax-app-is-ltr .vs-input--input.hasIcon {
+    padding-left: 2.5rem;
+}
+.vuesax-app-is-ltr .vs-input--icon {
+    left: 10px !important;
+}
 
 .row.login_row {
     border-radius: 1.5rem;
@@ -4802,6 +4840,16 @@ span.el-image-viewer__btn.el-image-viewer__close {
     top: 1rem;
 }
 @media screen and (max-width: 600px) {
+    div#setting > .vs-sidebar {
+        right: 0px !important;
+    }
+    header.header-table.vs-table--header button.vs-con-dropdown.parent-dropdown,
+    .display-sm-none {
+        display: none !important;
+    }
+    .con-input-search.vs-table--search {
+        width: 50%;
+    }
     .mail_avator {
         width: 40px;
         height: 40px;

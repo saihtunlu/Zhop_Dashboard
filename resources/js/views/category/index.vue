@@ -97,14 +97,8 @@
         </div>
 
         <div class="col-lg-6 mb-3">
-          <vs-input
-            class="edit2_btns"
-            label="Icon*"
-            placeholder="eg-user"
-            v-model="Category.icon"
-            required
-          />
-          <a href="https://feathericons.com/" target="_blank">
+          <vs-input class="edit2_btns" label="Icon*" v-model="Category.icon" required />
+          <a href="https://boxicons.com/" target="_blank">
             Explore icons
             <vs-icon icon="icon-external-link" icon-pack="feather" />
           </a>
@@ -139,7 +133,10 @@
               type="border"
               icon-pack="feather"
               icon="icon-chevron-down"
-            >1 - {{ max_pagination }} 0f {{ data.length }}</vs-button>
+            >
+              1 - {{ max_pagination }} 0f
+              {{ data.length }}
+            </vs-button>
             <vs-dropdown-menu class="page_dropdown">
               <vs-dropdown-item @click="max_pagination = '5'">5</vs-dropdown-item>
               <vs-dropdown-item @click="max_pagination = '10'">10</vs-dropdown-item>
@@ -160,7 +157,7 @@
             class="add_new ml-3"
             color="primary"
             @click="ChangeCategories(data.type)"
-            v-if="oldData.length>0"
+            v-if="oldData.length > 0"
             type="filled"
             icon-pack="feather"
             icon="icon-chevron-left"
@@ -177,17 +174,27 @@
 
         <template slot-scope="{ data }">
           <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data">
-            <vs-td :data="data[indextr].id">{{ parseInt(indextr)+1}}</vs-td>
+            <vs-td :data="data[indextr].id">
+              {{
+              parseInt(indextr) + 1
+              }}
+            </vs-td>
             <vs-td :data="data[indextr].image">
               <img class="product_image_table" :src="data[indextr].image" />
             </vs-td>
-            <vs-td :data="data[indextr].label">{{ data[indextr].label }}</vs-td>
-
-            <vs-td :data="data[indextr].icon">
-              <vs-icon :icon="`icon-${data[indextr].icon}`" icon-pack="feather"></vs-icon>
+            <vs-td :data="data[indextr].label">
+              {{
+              data[indextr].label
+              }}
             </vs-td>
+
+            <vs-td :data="data[indextr].icon">{{data[indextr].icon}}</vs-td>
             <vs-td :data="data[indextr].description">
-              <span class="truncate">{{ data[indextr].description }}</span>
+              <span class="truncate">
+                {{
+                data[indextr].description
+                }}
+              </span>
             </vs-td>
             <vs-td :data="data[indextr]">
               <vs-button
@@ -208,7 +215,7 @@
                 icon-pack="feather"
                 icon="icon-trash"
                 type="flat"
-                @click="deleteCat(data[indextr].id,index)"
+                @click="deleteCat(data[indextr].id, index)"
               ></vs-button>
               <vs-button
                 size="35px"
@@ -219,7 +226,12 @@
                 icon="icon-chevron-right"
                 type="flat"
                 v-if="!data[indextr].category2_id"
-                @click="filterCategories(data[indextr].id,data[indextr].category1_id)"
+                @click="
+                                    filterCategories(
+                                        data[indextr].id,
+                                        data[indextr].category1_id
+                                    )
+                                "
               ></vs-button>
             </vs-td>
           </vs-tr>
@@ -379,5 +391,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

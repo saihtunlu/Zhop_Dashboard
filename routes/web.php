@@ -52,7 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Events
     Route::post('/web/createEvent', 'Api\EventController@store');
-    Route::post('/web/updateEvent', 'Api\EventController@update');
+    Route::post('/web/updateMainEvent', 'Api\EventController@update');
     Route::get('/web/getEvents', 'Api\EventController@index');
     Route::delete('/web/deleteEvent/{id}', 'Api\EventController@destroy');
 
@@ -206,7 +206,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Dashboard
     Route::get('web/invoiceStatus/{year}', 'Api\DashboardController@invoice');
-    Route::post('web/orderStatus/', 'Api\DashboardController@order');
+    Route::get('web/orderStatus/{date}', 'Api\DashboardController@order');
     Route::get('web/getCounter/', 'Api\DashboardController@count');
     Route::get('web/calendarDashboard/', 'Api\DashboardController@calendar');
     Route::get('web/sellProduct/', 'Api\DashboardController@sellProduct');

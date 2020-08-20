@@ -16,14 +16,14 @@ class CalendarController extends Controller
         $user_id = Auth::id();
 
         $CalendarEvent = CalendarEvent::where('user_id', $user_id)->with('category')->get();
-        return response()->json($CalendarEvent);
+        return response()->json($CalendarEvent,200, [], JSON_NUMERIC_CHECK);
     }
     public function categories()
     {
         $user_id = Auth::id();
         $categories = CalendarCategory::where('user_id', $user_id)->get();
 
-        return response()->json($categories);
+        return response()->json($categories,200, [], JSON_NUMERIC_CHECK);
     }
     public function store(Request $request)
     {
@@ -52,7 +52,7 @@ class CalendarController extends Controller
         }
         $Event->save();
         $CalendarEvent = CalendarEvent::where('id', $Event->id)->with('category')->first();
-        return response()->json($CalendarEvent);
+        return response()->json($CalendarEvent,200, [], JSON_NUMERIC_CHECK);
     }
     public function update(Request $request)
     {
@@ -79,7 +79,7 @@ class CalendarController extends Controller
         }
         $Event->save();
         $CalendarEvent = CalendarEvent::where('id', $Event->id)->with('categories.category')->first();
-        return response()->json($CalendarEvent);
+        return response()->json($CalendarEvent,200, [], JSON_NUMERIC_CHECK);
     }
     public function destroy($id)
     {

@@ -9,6 +9,9 @@ use App\Payment;
 use App\Shipping;
 use App\Category1;
 use App\Event;
+use App\General;
+use App\Theme;
+use App\Attribute;
 
 class SendApiController extends Controller
 {
@@ -19,12 +22,18 @@ class SendApiController extends Controller
         $payments = Payment::with('banks', 'restrictions.shipping.cities', 'restrictions.cities')->get();
         $shippings = Shipping::with('cities', 'methods')->get();
         $categories = Category1::with('children.children')->get();
+        $variations = Attribute::with('details')->get();
         $events = Event::get();
+        $general = General::first();
+        $themes = Theme::get();
         $data['products'] = $products;
         $data['events'] = $events;
         $data['payments'] = $payments;
+        $data['general'] = $general;
+        $data['themes'] = $themes;
         $data['shippings'] = $shippings;
+        $data['variations'] = $variations;
         $data['categories'] = $categories;
-        return response()->json($data);
+        return response()->json($data,200, [], JSON_NUMERIC_CHECK);
     }
 }

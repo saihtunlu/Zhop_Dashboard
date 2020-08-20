@@ -13,7 +13,7 @@ class ShippingController extends Controller
     public function index()
     {
         $shippings = Shipping::with('cities', 'methods')->get();
-        return response()->json($shippings);
+        return response()->json($shippings,200, [], JSON_NUMERIC_CHECK);
     }
 
     public function store(Request $request)
@@ -96,7 +96,7 @@ class ShippingController extends Controller
     public function show($id)
     {
         $shipping = Shipping::where('id', $id)->with('cities', 'methods')->first();
-        return response()->json($shipping);
+        return response()->json($shipping,200, [], JSON_NUMERIC_CHECK);
     }
     public function destroy($id)
     {

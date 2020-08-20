@@ -19,7 +19,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with('images', 'variations.Attri2.attribute', 'variations.Attri1.attribute', 'brand', 'categories', 'tags.tag')->orderBy('created_at', 'desc')->get();
-        return response()->json($products);
+        return response()->json($products,200, [], JSON_NUMERIC_CHECK);
     }
 
     public function addAttribute(Request $request)
@@ -68,12 +68,12 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::where('id', $id)->with('images', 'variations.Attri2.attribute', 'variations.Attri1.attribute', 'brand', 'categories', 'tags.tag')->first();
-        return response()->json($product);
+        return response()->json($product,200, [], JSON_NUMERIC_CHECK);
     }
     public function variations($no)
     {
         $Attribute = Attribute::where('product_no', $no)->with('details')->get();
-        return response()->json($Attribute);
+        return response()->json($Attribute,200, [], JSON_NUMERIC_CHECK);
     }
     public function store(Request $request)
     {
@@ -340,7 +340,7 @@ class ProductController extends Controller
             }
         }
         if ($product->type === "Variable Product") {
-            Variation::where('product_id', $Product->id)->delete();
+
             $variations = json_decode($request->variations);
             $Attribute = Attribute::where('product_no', $product->product_no)->first();
             $Attribute->product_id = $Product->id;
@@ -350,7 +350,7 @@ class ProductController extends Controller
                 if (!empty($data->discount)) {
                     $discount = $data->discount;
                 }
-                $Variation = new Variation();
+                $Variation =  Variation::where('id', $data->id)->first();
                 $Variation->attribute1_id = $data->attribute1_id;
                 $Variation->attribute2_id = $data->attribute2_id;
                 $Variation->product_id = $Product->id;
@@ -363,7 +363,7 @@ class ProductController extends Controller
                 $Variation->width = $data->width;
                 $Variation->discount = $discount;
                 if ($data->image) {
-                    if (!preg_match('%^[a-zA-Z0-9/+]*={0,2}$%', 'images/uploads/1596034943Avatar.jpg')) {
+                    if (!preg_match('%^[a-zA-Z0-9/+]*={0,2}$%', $data->image)) {
                         $Variation->image = $data->image;
                     } else {
                         $image = $data->image; // base64 encoded
@@ -389,12 +389,12 @@ class ProductController extends Controller
     public function categories()
     {
         $ProductCategory = Category1::with('children.children')->get();
-        return response()->json($ProductCategory);
+        return response()->json($ProductCategory,200, [], JSON_NUMERIC_CHECK);
     }
     public function tags()
     {
 
         $Tag = Tag::get();
-        return response()->json($Tag);
+        return response()->json($Tag,200, [], JSON_NUMERIC_CHECK);
     }
 }

@@ -28,7 +28,7 @@ class TodoController extends Controller
         DB::table('todos')->where('ended_date', '<', now())->update(['expired' => 1]);
         $todo = Todo::where('user_id', $user_id)->with('categories.category')->orderBy('created_at', 'desc')->withTrashed()->get();
 
-        return response()->json($todo);
+        return response()->json($todo,200, [], JSON_NUMERIC_CHECK);
     }
     public function categories()
     {
@@ -36,7 +36,7 @@ class TodoController extends Controller
 
         $categories = TodoCategory::where('user_id', $user_id)->get();
 
-        return response()->json($categories);
+        return response()->json($categories,200, [], JSON_NUMERIC_CHECK);
     }
     public function store(Request $request)
     {

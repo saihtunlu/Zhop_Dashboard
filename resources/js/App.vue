@@ -113,7 +113,7 @@ export default {
   },
   created() {
     this.getGeneral();
-    this.togoNoti();
+
     this.listenForNewOrder();
     var ani = localStorage.getItem("animation");
     if (ani) {
@@ -182,16 +182,16 @@ export default {
       Echo.channel("newOrder").listen("NewOrder", (data) => {
         console.log("listenForNewOrder -> data", data);
         axios
-          .get(`getNoti`)
+          .get(`/web/getNoti`)
           .then((response) => {
             console.log("listenForNewOrder -> response", response);
             this.newOrder = response.data;
           })
           .catch((error) => {});
         Notification.requestPermission((permission) => {
-          let notification = new Notification("Adding New Student!", {
+          let notification = new Notification("New Order Arrived!", {
             body: data.data.name + " has made an order.", // content for the alert
-            icon: "http://192.168.100.9:8000/" + data.data.image,
+            icon: "https://zhop.admin.saihtunlu.me/" + data.data.image,
             // optional image url
           });
           notification.onclick = () => {
@@ -206,6 +206,7 @@ export default {
     setAuth() {
       if (localStorage.getItem("Auth")) {
         this.auth = JSON.parse(localStorage.getItem("Auth"));
+        this.togoNoti();
         // this.role = this.auth.user_role.role.name;
       }
     },

@@ -17,7 +17,7 @@ class CategoryController extends Controller
         $category2 = Category2::get();
         $category3 = Category3::get();
 
-        return response()->json(['category1' => $category1, 'category2' => $category2, 'category3' => $category3]);
+        return response()->json(['category1' => $category1, 'category2' => $category2, 'category3' => $category3],200, [], JSON_NUMERIC_CHECK);
     }
     public function update(Request $request)
     {
@@ -197,7 +197,7 @@ class CategoryController extends Controller
         $category->value = $category->id;
         $category->save();
 
-        return response($data);
+        return response($data,200, [], JSON_NUMERIC_CHECK);
     }
     public function destroy(Request $request)
     {

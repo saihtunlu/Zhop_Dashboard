@@ -14,12 +14,12 @@ class PaymentController extends Controller
     public function index()
     {
         $payments = Payment::with('banks', 'restrictions.shipping.cities', 'restrictions.cities')->get();
-        return response()->json($payments);
+        return response()->json($payments,200, [], JSON_NUMERIC_CHECK);
     }
     public function show($id)
     {
         $payment = Payment::where('id', $id)->with('banks', 'restrictions.shipping.cities', 'restrictions.cities')->first();
-        return response()->json($payment);
+        return response()->json($payment,200, [], JSON_NUMERIC_CHECK);
     }
     public function store(Request $request)
     {
@@ -64,12 +64,12 @@ class PaymentController extends Controller
                 }
             }
         }
-        return response()->json($Payment);
+        return response()->json($Payment,200, [], JSON_NUMERIC_CHECK);
     }
     public function update(Request $request)
     {
         $data = $request->data;
-        $Payment = Payment::where('id', $data['id'])->get();
+        $Payment = Payment::where('id', $data['id'])->first();
         $Payment->type = $data['type'];
         if ($data['description']) {
             $Payment->description = $data['description'];

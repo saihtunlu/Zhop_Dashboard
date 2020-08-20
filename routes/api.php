@@ -6,9 +6,10 @@ use Illuminate\Support\Facades\Broadcast;
 
 Broadcast::routes(['middleware' => ['auth:sanctum']]);
 
-Route::post('/password/create', 'Api\PasswordResetController@create');
-Route::get('/password/find/{token}', 'Api\PasswordResetController@find');
-Route::post('/password/reset', 'Api\PasswordResetController@reset');
+Route::post('/password/create', 'Api\PasswordClientController@create');
+Route::post('/password/find', 'Api\PasswordClientController@find');
+Route::post('/password/reset', 'Api\PasswordClientController@reset');
+Route::post('/signUp', 'Api\AuthController@signUp');
 
 Route::get('signup/activate/{token}', 'Api\VerificationController@signupActivate');
 Route::get('general/', 'Api\GeneralController@index');
@@ -20,10 +21,10 @@ Route::get('/slip/{id}', 'Api\OrderController@slip');
 Route::get('getVariation/{no}', 'Api\ProductController@variations');
 Route::get('getAllData', 'Api\SendApiController@index');
 
-//Reset Password
-Route::post('/password/create', 'Api\PasswordResetController@create');
-Route::post('/password/find', 'Api\PasswordResetController@find');
-Route::post('/password/reset', 'Api\PasswordResetController@reset');
+// //Reset Password
+// Route::post('/password/create', 'Api\PasswordResetController@create');
+// Route::post('/password/find', 'Api\PasswordResetController@find');
+// Route::post('/password/reset', 'Api\PasswordResetController@reset');
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/auth', 'Api\UserController@auth')->name('auth');
@@ -37,7 +38,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/getFav', 'Api\FavController@show');
     Route::post('/removeFav', 'Api\FavController@remove');
     Route::post('/logouts', 'Api\AuthController@logout');
-    Route::post('/signUp', 'Api\AuthController@signUp');
 
     //Role
     Route::get('/orders', 'Api\OrderController@index');

@@ -295,7 +295,7 @@ export default {
         type: "border",
         scale: 0.4,
       });
-      var url = !this.add ? "web/updateEvent" : "web/createEvent";
+      var url = !this.add ? "web/updateMainEvent" : "web/createEvent";
       axios
         .post(url, {
           data: this.Event,

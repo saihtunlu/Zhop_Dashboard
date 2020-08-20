@@ -24,19 +24,20 @@ class DashboardController extends Controller
             ->orderBy('created_at')
             ->groupBy(DB::raw("MONTH(create_date)"))
             ->get();
-        return response()->json($monthly);
+        return response()->json($monthly,200, [], JSON_NUMERIC_CHECK);
     }
 
-    public function order(Request $request)
+    public function order($date)
     {
-        $Date = $request->date;
+      $dates = explode(",", $date);
+      
         $monthly = DB::table("orders")
-            ->where([[DB::raw("YEAR(created_at)"), $Date[0]], [DB::raw("MONTH(created_at)"), $Date[1]]])
+            ->where([[DB::raw("YEAR(created_at)"), $dates[0]], [DB::raw("MONTH(created_at)"), $dates[1]]])
             ->select(DB::raw('sum(totalPrice) as total'), DB::raw('count(id) as count'),  DB::raw('DAY(created_at) as day'))
             ->orderBy('created_at')
             ->groupBy(DB::raw("DAY(created_at)"))
             ->get();
-        return response()->json($monthly);
+        return response()->json($monthly,200, [], JSON_NUMERIC_CHECK);
     }
 
     public function calendar()
@@ -44,7 +45,7 @@ class DashboardController extends Controller
         $user_id = Auth::id();
         $calendar = CalendarEvent::where('user_id', $user_id)->get();
         // $order = OrderDetail::select(DB::raw('COUNT(id) as cnt', 'product_id'))->groupBy('product_id')->orderBy('cnt', 'DESC')->first();
-        return response()->json($calendar);
+        return response()->json($calendar,200, [], JSON_NUMERIC_CHECK);
     }
     public function count()
     {
@@ -57,11 +58,11 @@ class DashboardController extends Controller
         $count['customer'] = count($customer);
         $count['order'] = count($order);
         $count['brand'] = count($brand);
-        return response()->json($count);
+        return response()->json($count,200, [], JSON_NUMERIC_CHECK);
     }
     public function sellProduct()
     {
         $products = Product::with('images', 'variations.Attri2.attribute', 'variations.Attri1.attribute', 'brand', 'categories', 'tags.tag')->orderBy('sold_out', 'desc')->limit(6)->get();
-        return response()->json($products);
+        return response()->json($products,200, [], JSON_NUMERIC_CHECK);
     }
 }

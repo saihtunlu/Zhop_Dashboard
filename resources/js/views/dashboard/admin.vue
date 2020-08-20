@@ -296,7 +296,7 @@ export default {
         series: [
           {
             name: "Incomes",
-            data: [31, 40, 28, 51, 42, 109, 100, 11, 32, 45, 32, 34, 52, 41],
+            data: this.Incomes,
           },
         ],
         fill: {
@@ -398,7 +398,7 @@ export default {
       this.order_year = year;
       this.order_month = month;
       axios
-        .post(`web/orderStatus/`, { date: date })
+        .get(`web/orderStatus/${date}`)
         .then((response) => {
           this.$vs.loading({
             background: "rgb(var(--vs-theme),0.2)",

@@ -12,7 +12,7 @@ class ThemeController extends Controller
     {
         $Theme = Theme::get();
 
-        return response()->json($Theme);
+        return response()->json($Theme,200, [], JSON_NUMERIC_CHECK);
     }
     public function update(Request $request)
     {

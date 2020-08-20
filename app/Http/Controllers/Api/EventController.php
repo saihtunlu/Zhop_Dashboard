@@ -11,7 +11,7 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::get();
-        return response()->json($events);
+        return response()->json($events,200, [], JSON_NUMERIC_CHECK);
     }
     public function store(Request $request)
     {
@@ -40,9 +40,9 @@ class EventController extends Controller
     public function update(Request $request)
     {
         $data = $request->data;
-        $event = Event::where('id', $data['id'])->get();
-        $event->title = $data['title'];
-        if ($data['image'] !== $event->image) {
+        if (!preg_match('%^[a-zA-Z0-9/+]*={0,2}$%', $data['image'])) {
+            $imagePath = $data['image'];
+        } else {
             $image = $data['image']; // base64 encoded
             $extension = explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];   // .jpg .png .pdf
             $replace = substr($image, 0, strpos($image, ',') + 1);
@@ -52,8 +52,12 @@ class EventController extends Controller
             $path = public_path() . "/images/uploads/" . $imageName;
             $image_decoded = base64_decode($image); // decoding File
             file_put_contents($path, $image_decoded);
-            $event->image = '/images/uploads/' . $imageName; //full path
+            $imagePath = '/images/uploads/' . $imageName; //full path
         }
+
+        $event = Event::where('id', $data['id'])->first();
+        $event->title = $data['title'];
+        $event->image = $imagePath;
         if (!empty($data['link'])) {
             $event->link = $data['link'];
         }

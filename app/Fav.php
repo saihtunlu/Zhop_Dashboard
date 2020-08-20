@@ -8,7 +8,7 @@ class Fav extends Model
 {
     public function product($value = '')
     {
-        return $this->belongsTo('App\product');
+        return $this->belongsTo('App\Product');
     }
     public function user($value = '')
     {

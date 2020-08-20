@@ -7,7 +7,11 @@ use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
-use App\Order;
+use App\Permission_User;
+use App\PermissionProduct;
+use App\PermissionInvoice;
+use App\Role;
+use App\User_Role;
 
 class AuthController extends Controller
 {
@@ -42,19 +46,51 @@ class AuthController extends Controller
         $email = $data['email'];
         $username = $data['username'];
         $password = $data['password'];
-        $type = $data['type'];
         $password = Hash::make($data['password']);
         $checkEmail = User::where('email', $email)->first();
         if (!empty($checkEmail)) {
-            return response()->json(['message' => 'This email is already taken!']);
+            return response()->json(['message' => 'This email is already taken!'], 422);
         } else {
             //register user
             $User = new User;
             $User->email = $email;
             $User->name = $username;
             $User->password = $password;
-            $User->type = $type;
             $User->save();
+
+            $Role = Role::where('name', 'Customer')->first();
+            $User_Role = new User_Role;
+            $User_Role->user_id = $User->id;
+            $User_Role->role_id = $Role->id;
+            $User_Role->save();
+            //user_permission
+            $Permission_User = new Permission_User;
+            $Permission_User->name = 'User';
+            $Permission_User->create = 0;
+            $Permission_User->update = 0;
+            $Permission_User->read = 0;
+            $Permission_User->delete = 0;
+            $Permission_User->user_id = $User->id;
+            $Permission_User->save();
+            //user_permission
+            $PermissionProduct = new PermissionProduct;
+            $PermissionProduct->name = 'Product';
+            $PermissionProduct->create = 0;
+            $PermissionProduct->update = 0;
+            $PermissionProduct->read = 0;
+            $PermissionProduct->delete = 0;
+            $PermissionProduct->user_id = $User->id;
+            $PermissionProduct->save();
+            //invoice_permission
+            $PermissionInvoice = new PermissionInvoice;
+            $PermissionInvoice->name = 'Invoice';
+            $PermissionInvoice->create = 0;
+            $PermissionInvoice->update = 0;
+            $PermissionInvoice->read = 0;
+            $PermissionInvoice->delete = 0;
+            $PermissionInvoice->user_id = $User->id;
+            $PermissionInvoice->save();
+
             return response()->json(['message' => 'Successfully Registered.']);
         }
     }
